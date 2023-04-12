@@ -11,8 +11,8 @@ export const SearchPage = () => {
   const { q = "" } = queryString.parse(location.search);
   const heroes = getHeroesByName(q);
 
-  const showSearch = (q.length === 0);
-  const showError  = (q.length > 0) && heroes.length === 0;
+  const showSearch = q.length === 0;
+  const showError = q.length > 0 && heroes.length === 0;
 
   const { searchText, onInputChange } = useForm({
     searchText: q,
@@ -38,7 +38,7 @@ export const SearchPage = () => {
         <div className="col-5">
           <h4>Searching</h4>
           <hr />
-          <form onSubmit={handleSearchSubmit}>
+          <form onSubmit={handleSearchSubmit} aria-label="form">
             <input
               type="text"
               placeholder="Find your hero"
@@ -70,6 +70,7 @@ export const SearchPage = () => {
           </div>
 
           <div
+            aria-label="alert-danger"
             className="alert alert-danger animate__animated animate__fadeIn"
             style={{ display: showError ? "" : "none" }}
           >
